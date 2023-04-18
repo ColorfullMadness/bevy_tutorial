@@ -47,15 +47,13 @@ impl Plugin for PlayerPlugin {
         // )
 
         //? fourth way to order systems
-        .add_system(player_movement
-            .in_set(MovementSystemSet)
-            .run_if(in_state(AppState::Game))
-            .run_if(in_state(SimulationState::Running))
-        )
-        .add_system(confine_player_movement
-            .in_set(ConfinementSystemSet)
-            .run_if(in_state(AppState::Game))
-            .run_if(in_state(SimulationState::Running))
+        .add_systems(
+            (
+                player_movement.in_set(MovementSystemSet),
+                confine_player_movement.in_set(ConfinementSystemSet)
+            )
+                .in_set(OnUpdate(AppState::Game))
+                .in_set(OnUpdate(SimulationState::Running))
         )
         .add_systems(
             (player_hit_enemy,player_hit_star)
