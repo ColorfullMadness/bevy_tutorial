@@ -15,7 +15,7 @@ use score::ScorePlugin;
 use star::StarPlugin;
 use systems::*;
 
-pub struct GamePlug
+pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
