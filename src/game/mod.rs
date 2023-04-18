@@ -23,19 +23,23 @@ impl Plugin for GamePlugin {
         .add_state::<SimulationState>()
         //Events
         .add_event::<GameOver>()
+        //On Enter Systems
+        .add_system(pause_simulation.in_schedule(OnEnter(AppState::Game)))
         //Plugins
         .add_plugin(EnemyPlugin)
         .add_plugin(StarPlugin)
         .add_plugin(PlayerPlugin)
         .add_plugin(ScorePlugin)
         //Systems
-        .add_system(toggle_simulation.run_if(in_state(AppState::Game)));
+        .add_system(toggle_simulation.run_if(in_state(AppState::Game)))
+        //On exit systems
+        .add_system(resume_simulation.in_schedule(OnExit(AppState::Game)));
     }
 }
 
 #[derive(States,Debug, Clone, Copy, Eq, PartialEq, Hash, Default)]
 pub enum SimulationState {
-    Running,
     #[default]
+    Running,
     Paused,
 }
