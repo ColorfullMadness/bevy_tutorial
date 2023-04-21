@@ -20,11 +20,10 @@ pub fn toggle_simulation(
 ) {
     if keyboard_input.just_pressed(KeyCode::Space) {
         if simulation_state.0 == Some(SimulationState::Running) {
-            simulation_state.set(SimulationState::Running);
-            println!("Simulation paused.");
-        }
-        if simulation_state.0 == Some(SimulationState::Paused) {
             simulation_state.set(SimulationState::Paused);
+            println!("Simulation paused.");
+        } else {
+            simulation_state.set(SimulationState::Running);
             println!("Simulation running.");
         }
     }
