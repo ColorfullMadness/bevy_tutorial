@@ -5,6 +5,7 @@ mod player;
 pub mod score;
 pub mod star;
 mod systems;
+pub mod ui;
 
 use crate::AppState;
 
